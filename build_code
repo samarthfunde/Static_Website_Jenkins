@@ -1,0 +1,13 @@
+zip myfile.zip ./*
+sudo chmod 600 /home/ubuntu/public.pem
+sudo scp -i /home/ubuntu/public.pem -o StrictHostKeyChecking=no myfile.zip ubuntu@65.0.125.234:.
+sudo ssh -i /home/ubuntu/public.pem  -o StrictHostKeyChecking=no ubuntu@65.0.125.234<<EOF
+sudo apt update -y
+sudo apt install nginx -y
+sudo apt install zip -y
+sudo cp myfile.zip /var/www/html
+cd /var/www/html
+sudo rm *.html
+sudo unzip myfile.zip
+curl http://localhost
+EOF
